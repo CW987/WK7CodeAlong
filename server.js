@@ -1,6 +1,6 @@
 import express from "express";
 import cors from "cors";
-
+import { db } from "./dbConnect.js";
 
 const app = express();
 
@@ -23,3 +23,10 @@ app.get("/", function (_, res) {
 
 // Tell server to allow resource sharing with CORS
 app.use(cors());
+
+// CRUD create, read, update, delete. Post, Get, Put, Delete.
+
+app.get("/guests", async (req, res) => {
+    const result = await db.query(`SELECT * FROM guests`);
+    res.json(result.rows);
+});
