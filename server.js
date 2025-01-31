@@ -46,3 +46,21 @@ app.post("/add-guest", (req, res) => {
 //     date_of_stay: "2024/05/26",
 //     comments: "Died here"
 // }
+
+//  update an existing entry - one element to request the data, one to specify which entry to be updated --> params
+app.put("/update-gues/:id", (req, res) => {
+    const updateData = req.body;
+    const paramsToUpdateGuest = req.params;
+    const query = db.query(`UPDATE guests SET guest_name = $1, date_of_stay = $2, comments = $3 WHERE id= $4`, [
+        updateData.guest_name, 
+        updateData.date_of_stay, 
+        updateData.comments,
+        paramsToUpdateGuest.id
+    ]);
+    res.json({ message: "Data update complete! Go check it" })
+});
+
+// example param object
+// params = {
+//     id: 1,
+// }
