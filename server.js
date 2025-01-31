@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
-import dotenv from "dotenv";
-import pg from "pg";
+
 
 const app = express();
 
@@ -21,3 +20,6 @@ app.listen(PORT, (req, res) => {
 app.get("/", function (_, res) {
     res.json({message: "This is the root route, how ruoude!"});
 });
+
+// Tell server to allow resource sharing with CORS
+app.use(cors());
