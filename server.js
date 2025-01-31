@@ -36,5 +36,13 @@ app.get("/guests", async (req, res) => {
 app.post("/add-guest", (req, res) => {
     //Requires element to store new data
     const newData = req.body;
-    db.query(`INSERT INTO guests ()`)
-})
+    db.query(`INSERT INTO guests (guest_name, date_of_stay, comments) VALUES($1, $2, $3)`, [newData.guest_name, newData.date_of_stay, newData.comments]
+    )
+});
+
+// Example body object
+// body ={
+//     guest_name: "Jane Doe",
+//     date_of_stay: "2024/05/26",
+//     comments: "Died here"
+// }
