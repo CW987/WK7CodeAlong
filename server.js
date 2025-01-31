@@ -9,5 +9,15 @@ const app = express();
 app.use(express.json());
 
 //Sets local host 
+//Anonymous callback arrow function ie. function with no name.
 const PORT = 8080;
-app.listen(PORT, (req, res) => {});
+app.listen(PORT, (req, res) => {
+    console.log(`Server is running PORT ${PORT}`);
+});
+
+//Root route of server - the main address (/) -- READ (GET)
+//Each route has two elements, the address and the task
+// The task here is to read data
+app.get("/", function (_, res) {
+    res.json({message: "This is the root route, how ruoude!"});
+});
