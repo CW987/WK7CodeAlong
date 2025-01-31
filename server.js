@@ -27,6 +27,14 @@ app.use(cors());
 // CRUD create, read, update, delete. Post, Get, Put, Delete.
 
 app.get("/guests", async (req, res) => {
-    const result = await db.query(`SELECT * FROM guests`);
+    const result = await db.query(`SELECT * FROM guests`); //Can use multiple of these to select different pieces of data for a new endpoint
     res.json(result.rows);
 });
+
+// POST ROUTE - new data entry - requires client to work
+
+app.post("/add-guest", (req, res) => {
+    //Requires element to store new data
+    const newData = req.body;
+    db.query(`INSERT INTO guests ()`)
+})
