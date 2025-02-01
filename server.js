@@ -41,7 +41,7 @@ app.post("/add-guest", (req, res) => {
 });
 
 // Example body object - for postman
-// body ={
+// {
 //     guest_name: "Jane Doe",
 //     date_of_stay: "2024/05/26",
 //     comments: "Died here"
@@ -64,3 +64,10 @@ app.put("/update-guest/:id", (req, res) => {
 // params = {
 //     id: 1,
 // }
+
+// Delete 
+app.delete("/delete-entry/:id", (req, res) => {
+    const paramsToDeleteGuest = req.params;
+    const query = db.query(`DELETE FROM guests WHERE id= $1`, [paramsToDeleteGuest.id] );
+    res.json({ message: "Shocktopus Record deleted" })
+});
