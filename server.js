@@ -40,7 +40,7 @@ app.post("/add-guest", (req, res) => {
     )
 });
 
-// Example body object
+// Example body object - for postman
 // body ={
 //     guest_name: "Jane Doe",
 //     date_of_stay: "2024/05/26",
@@ -48,7 +48,7 @@ app.post("/add-guest", (req, res) => {
 // }
 
 //  update an existing entry - one element to request the data, one to specify which entry to be updated --> params
-app.put("/update-gues/:id", (req, res) => {
+app.put("/update-guest/:id", (req, res) => {
     const updateData = req.body;
     const paramsToUpdateGuest = req.params;
     const query = db.query(`UPDATE guests SET guest_name = $1, date_of_stay = $2, comments = $3 WHERE id= $4`, [
