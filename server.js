@@ -4,34 +4,35 @@ import { db } from "./dbConnect.js";
 
 const app = express();
 
-//Tells the server we will be using json
+//!Tells the server we will be using json
 app.use(express.json());
 
-//Sets local host 
+//!Sets local host 
 //Anonymous callback arrow function ie. function with no name.
 const PORT = 8080;
 app.listen(PORT, (req, res) => {
     console.log(`Server is running PORT ${PORT}`);
 });
 
-//Root route of server - the main address (/) -- READ (GET)
+//!Root route of server - the main address (/) -- READ (GET)
 //Each route has two elements, the address and the task
 // The task here is to read data
 app.get("/", function (_, res) {
     res.json({message: "This is the root route, how ruoude!"});
 });
 
-// Tell server to allow resource sharing with CORS
+// !Tell server to allow resource sharing with CORS
 app.use(cors());
 
 // CRUD create, read, update, delete. Post, Get, Put, Delete.
+// ! GET ROUTE
 
 app.get("/guests", async (req, res) => {
     const result = await db.query(`SELECT * FROM guests`); //Can use multiple of these to select different pieces of data for a new endpoint
     res.json(result.rows);
 });
 
-// POST ROUTE - new data entry - requires client to work
+//! POST ROUTE - new data entry - requires client to work
 
 app.post("/add-guest", (req, res) => {
     //Requires element to store new data
@@ -48,7 +49,7 @@ app.post("/add-guest", (req, res) => {
 //     comments: "Died here"
 // }
 
-//  update an existing entry - one element to request the data, one to specify which entry to be updated --> params
+// ! UPDATE ROUTE an existing entry - one element to request the data, one to specify which entry to be updated --> params
 app.put("/update-guest/:id", (req, res) => {
     const updateData = req.body;
     const paramsToUpdateGuest = req.params;
@@ -66,7 +67,7 @@ app.put("/update-guest/:id", (req, res) => {
 //     id: 1,
 // }
 
-// Delete 
+//! DELETE ROUTE 
 app.delete("/delete-entry/:id", (req, res) => {
     const paramsToDeleteGuest = req.params;
     const query = db.query(`DELETE FROM guests WHERE id= $1`, [paramsToDeleteGuest.id] );
