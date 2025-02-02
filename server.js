@@ -37,7 +37,8 @@ app.post("/add-guest", (req, res) => {
     //Requires element to store new data
     const newData = req.body;
     db.query(`INSERT INTO guests (guest_name, date_of_stay, comments) VALUES($1, $2, $3)`, [newData.guest_name, newData.date_of_stay, newData.comments]
-    )
+    );
+    res.json({ message: "Add new guest complete! Go check it" })
 });
 
 // Example body object - for postman
